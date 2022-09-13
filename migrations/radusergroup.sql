@@ -36,6 +36,13 @@ VALUES
     86,
     '2022-06-29 00:09:04'
   ),
+  (
+    'parham.alvani',
+    'Faculty',
+    1,
+    2,
+    '2022-09-13 00:00:01'
+  ),
   ('bbakhshi', 'Faculty', 1, 5, NULL),
   (
     'mohammadhfatemi',
