@@ -19,7 +19,7 @@ func NewSQL(db *gorm.DB) *SQL {
 	}
 }
 
-func (sql *SQL) Create(ctx context.Context, name string, count int) ([]model.Check, error) {
+func (sql *SQL) Create(ctx context.Context, name string, count int, groupName string) ([]model.Check, error) {
 	users := make([]model.Check, count)
 
 	if err := sql.Delete(ctx, name); err != nil {
@@ -34,10 +34,16 @@ func (sql *SQL) Create(ctx context.Context, name string, count int) ([]model.Che
 			Username:  fmt.Sprintf("%s_%d", name, i),
 			Attribute: "Cleartext-Password",
 			Op:        ":=",
-			Value:     "",
+			Value:     RandomString(PasswordLength),
 		}
 
 		tran.WithContext(ctx).Create(&users[i])
+
+		tran.WithContext(ctx).Create(&model.UserGroup{
+			ID:        0,
+			Username:  fmt.Sprintf("%s_%d", name, i),
+			Groupname: groupName,
+		})
 	}
 
 	if err := tran.Commit().Error; err != nil {
@@ -48,8 +54,17 @@ func (sql *SQL) Create(ctx context.Context, name string, count int) ([]model.Che
 }
 
 func (sql *SQL) Delete(ctx context.Context, name string) error {
-	return sql.DB.
+	tran := sql.DB.Begin()
+
+	tran.
 		WithContext(ctx).
 		Where("username LIKE ?", fmt.Sprintf("%s_%%", name)).
-		Delete(new(model.Check)).Error
+		Delete(new(model.Check))
+
+	tran.
+		WithContext(ctx).
+		Where("username LIKE ?", fmt.Sprintf("%s_%%", name)).
+		Delete(new(model.UserGroup))
+
+	return tran.Commit().Error
 }

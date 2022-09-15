@@ -3,7 +3,7 @@ package model
 type UserGroup struct {
 	Username  string
 	Groupname string
-	ID        uint
+	ID        uint `gorm:"<-:false,autoIncrement"`
 }
 
 func (UserGroup) TableName() string {
