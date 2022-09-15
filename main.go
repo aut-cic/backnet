@@ -6,6 +6,7 @@ import (
 	"github.com/aut-cic/backnet/internal/config"
 	"github.com/aut-cic/backnet/internal/db"
 	"github.com/aut-cic/backnet/internal/model"
+	"github.com/aut-cic/backnet/internal/store/conference"
 	"github.com/pterm/pterm"
 	"github.com/pterm/pterm/putils"
 )
@@ -34,4 +35,11 @@ func main() {
 	}
 
 	pterm.Info.Printfln("%+v\n", rc)
+
+	users, err := conference.NewSQL(db).Create(context.Background(), "parham", 10)
+	if err != nil {
+		pterm.Fatal.Printfln("conference creation failed %s", err)
+	}
+
+	pterm.Info.Printfln("%+v\n", users)
 }
