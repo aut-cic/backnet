@@ -15,6 +15,7 @@ type Conference struct {
 	Store conference.Conference
 }
 
+// nolint: wrapcheck
 func (con Conference) Create(c echo.Context) error {
 	req := new(request.Conference)
 
@@ -35,14 +36,28 @@ func (con Conference) Create(c echo.Context) error {
 
 	wc := csv.NewWriter(buff)
 
-	wc.Write([]string{"username", "password"})
+	if err := wc.Write([]string{"username", "password"}); err != nil {
+		pterm.Error.Printfln("write to csv failed %s", err)
+
+		return echo.ErrInternalServerError
+	}
+
 	for _, user := range users {
-		wc.Write([]string{
+		if err := wc.Write([]string{
 			user.Username,
 			user.Value,
-		})
+		}); err != nil {
+			pterm.Error.Printfln("write to csv failed %s", err)
+
+			return echo.ErrInternalServerError
+		}
 	}
+
 	wc.Flush()
 
 	return c.Blob(http.StatusOK, "application/csv", buff.Bytes())
+}
+
+func (con Conference) Register(g *echo.Group) {
+	g.POST("/", con.Create)
 }
