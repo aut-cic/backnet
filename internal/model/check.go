@@ -1,7 +1,7 @@
 package model
 
 type Check struct {
-	ID        uint
+	ID        uint `gorm:"<-:false,autoIncrement"`
 	Username  string
 	Attribute string
 	Op        string
