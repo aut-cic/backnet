@@ -68,3 +68,7 @@ func (sql *SQL) Delete(ctx context.Context, name string) error {
 
 	return tran.Commit().Error
 }
+
+func (sql *SQL) List(ctx context.Context, name string) ([]model.Check, error) {
+	return nil, nil
+}
