@@ -36,7 +36,7 @@ func main() {
 
 	pterm.Info.Printfln("%+v\n", rc)
 
-	users, err := conference.NewSQL(db).Create(context.Background(), "parham", 10)
+	users, err := conference.NewSQL(db).Create(context.Background(), "parham", 10, "Faculty")
 	if err != nil {
 		pterm.Fatal.Printfln("conference creation failed %s", err)
 	}
