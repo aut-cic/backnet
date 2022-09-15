@@ -3,6 +3,7 @@ package handler
 import (
 	"bytes"
 	"encoding/csv"
+	"fmt"
 	"net/http"
 
 	"github.com/aut-cic/backnet/internal/http/request"
@@ -55,7 +56,9 @@ func (con Conference) Create(c echo.Context) error {
 
 	wc.Flush()
 
-	return c.Blob(http.StatusOK, "application/csv", buff.Bytes())
+	c.Response().Header().Add("Content-Disposition", fmt.Sprintf("attachment;filename=%s.csv", req.Name))
+
+	return c.Blob(http.StatusOK, "text/csv", buff.Bytes())
 }
 
 func (con Conference) Register(g *echo.Group) {
