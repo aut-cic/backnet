@@ -1,12 +1,13 @@
 package main
 
 import (
-	"context"
+	"html/template"
 
 	"github.com/aut-cic/backnet/internal/config"
 	"github.com/aut-cic/backnet/internal/db"
-	"github.com/aut-cic/backnet/internal/model"
+	"github.com/aut-cic/backnet/internal/http/handler"
 	"github.com/aut-cic/backnet/internal/store/conference"
+	"github.com/labstack/echo/v4"
 	"github.com/pterm/pterm"
 	"github.com/pterm/pterm/putils"
 )
@@ -28,18 +29,28 @@ func main() {
 		pterm.Fatal.Printfln("database initiation failed %s", err)
 	}
 
-	rc := new(model.Check)
+	app := echo.New()
 
-	if err := db.WithContext(context.Background()).First(rc).Error; err != nil {
-		pterm.Fatal.Printfln("database query failed %s", err)
+	t := &handler.Template{
+		Templates: template.Must(template.ParseGlob("web/template/*.html")),
+	}
+	app.Renderer = t
+
+	{
+		h := handler.Conference{
+			Store: conference.NewSQL(db),
+		}
+
+		h.Register(app.Group("/api/conference"))
 	}
 
-	pterm.Info.Printfln("%+v\n", rc)
+	{
+		h := handler.Pages{}
 
-	users, err := conference.NewSQL(db).Create(context.Background(), "parham", 10, "Faculty")
-	if err != nil {
-		pterm.Fatal.Printfln("conference creation failed %s", err)
+		h.Register(app.Group(""))
 	}
 
-	pterm.Info.Printfln("%+v\n", users)
+	if err := app.Start(":1378"); err != nil {
+		pterm.Fatal.Printfln("http server initiation failed %s", err)
+	}
 }
