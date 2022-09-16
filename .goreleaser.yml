@@ -1,0 +1,23 @@
+---
+project_name: backnet
+
+release:
+  github:
+    owner: aut-cic
+    name: backnet
+
+checksum: {}
+
+builds:
+  - binary: backnet
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+    main: ./main.go
+
+archives:
+  - id: default
+    format: tar.gz
