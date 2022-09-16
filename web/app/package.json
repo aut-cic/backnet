@@ -1,0 +1,6 @@
+{
+  "name": "backnet",
+  "description": "Internet backend portal for creating bulk users, zeroing used volume etc.",
+  "author": "Parham Alvani <parham.alvani@gmail.com>",
+  "license": "GPLv3"
+}
