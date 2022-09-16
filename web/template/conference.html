@@ -1,26 +1,29 @@
 <!doctype html>
-<html lang="en">
+<html lang="fa" dir="rtl">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Backnet</title>
-    <script src="/dist/main.bundle.js" />
+    <script src="/dist/main.bundle.js"></script>
   </head>
   <body>
-    <form class="row g-3 needs-validation" method="post" action="/api/conference/">
-      <div class="mb-3">
-        <label for="name" class="form-label">نام رویداد: </label>
-        <input type="text" id="name" name="name" placeholder="konkor"></input>
-      </div>
-      <div class="mb-3">
-        <label for="count" class="form-label">شمار شرکت کنندگان: </label>
-        <input type="number" id="count" name="count"></input>
-      </div>
-      <div class="mb-3">
-        <label for="group" class="form-label">گروه: </label>
-        <input type="text" id="group" name="group" placeholder="Faculty"></input>
-      </div>
-      <button type="submit">Create 🚀</button>
-    </form>
+    <div class="container">
+      <h1>ساخت اکانت اینترنت برای رویدادها</h1>
+      <form class="row g-3 needs-validation" method="post" action="/api/conference/">
+        <div class="mb-3">
+          <label for="name" class="form-label">نام رویداد: </label>
+          <input type="text" id="name" name="name" class="form-control" placeholder="konkor"></input>
+        </div>
+        <div class="mb-3">
+          <label for="count" class="form-label">شمار شرکت کنندگان: </label>
+          <input type="number" id="count" class="form-control" name="count"></input>
+        </div>
+        <div class="mb-3">
+          <label for="group" class="form-label">گروه: </label>
+          <input type="text" id="group" class="form-control" name="group" placeholder="Faculty"></input>
+        </div>
+        <button type="submit" class="btn btn-primary">بساز 🚀</button>
+      </form>
+    </div>
   </body>
 </html>
