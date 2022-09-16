@@ -1,6 +1,7 @@
 package main
 
 import (
+	"embed"
 	"html/template"
 
 	"github.com/aut-cic/backnet/internal/config"
@@ -11,6 +12,9 @@ import (
 	"github.com/pterm/pterm"
 	"github.com/pterm/pterm/putils"
 )
+
+//go:embed web/template/*.html
+var templates embed.FS
 
 func main() {
 	pterm.DefaultCenter.Println("in the name of god")
@@ -32,7 +36,7 @@ func main() {
 	app := echo.New()
 
 	t := &handler.Template{
-		Templates: template.Must(template.ParseGlob("web/template/*.html")),
+		Templates: template.Must(template.ParseFS(templates)),
 	}
 	app.Renderer = t
 
