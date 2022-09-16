@@ -50,7 +50,7 @@ func New() Config {
 
 	indent, err := json.MarshalIndent(instance, "", "\t")
 	if err != nil {
-		log.Fatal("cannot marshal configuration back to json %s", err)
+		log.Fatalf("cannot marshal configuration back to json %s", err)
 	}
 
 	indent = pretty.Color(indent, nil)
