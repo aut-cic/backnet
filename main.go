@@ -13,6 +13,13 @@ import (
 	"github.com/pterm/pterm/putils"
 )
 
+// nolint: gochecknoglobals
+var (
+	version = "dev"
+	commit  = "none"
+	date    = "unknown"
+)
+
 //go:embed web/template/*.html
 var templates embed.FS
 
@@ -24,7 +31,11 @@ func main() {
 
 	pterm.DefaultCenter.
 		WithCenterEachLineSeparately().
-		Println("The back door to the AUT internet\nDeveloped by @1995parham")
+		Printfln(
+			"backnet %s, commit %s, built at %s\n"+
+				"The back door to the AUT internet\nDeveloped by @1995parham",
+			version, commit, date,
+		)
 
 	cfg := config.New()
 
