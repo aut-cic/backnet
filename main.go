@@ -3,6 +3,8 @@ package main
 import (
 	"embed"
 	"html/template"
+	"io/fs"
+	"net/http"
 
 	"github.com/aut-cic/backnet/internal/config"
 	"github.com/aut-cic/backnet/internal/db"
@@ -13,15 +15,15 @@ import (
 	"github.com/pterm/pterm/putils"
 )
 
+//go:embed web
+var assets embed.FS
+
 // nolint: gochecknoglobals
 var (
 	version = "dev"
 	commit  = "none"
 	date    = "unknown"
 )
-
-//go:embed web/template/*.html
-var templates embed.FS
 
 func main() {
 	pterm.DefaultCenter.Println("in the name of god")
@@ -47,9 +49,18 @@ func main() {
 	app := echo.New()
 
 	t := &handler.Template{
-		Templates: template.Must(template.ParseFS(templates)),
+		Templates: template.Must(template.ParseFS(assets, "web/template/*.html")),
 	}
+	pterm.Info.Println(t.Templates.DefinedTemplates())
 	app.Renderer = t
+
+	fsys, err := fs.Sub(assets, "web/app")
+	if err != nil {
+		pterm.Fatal.Printfln("cannot find web/app folder %s", err)
+	}
+
+	distHandler := http.FileServer(http.FS(fsys))
+	app.GET("/dist/*", echo.WrapHandler(distHandler))
 
 	{
 		h := handler.Conference{
