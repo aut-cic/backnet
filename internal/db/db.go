@@ -12,7 +12,7 @@ func New(cfg Config) (*gorm.DB, error) {
 	url := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s",
 		cfg.User, cfg.Password, cfg.Host, cfg.Port, cfg.DBName)
 
-	db, err := gorm.Open(mysql.Open(url), &gorm.Config{})
+	db, err := gorm.Open(mysql.Open(url), new(gorm.Config))
 	if err != nil {
 		return nil, fmt.Errorf("cannot open a database connection %w", err)
 	}
