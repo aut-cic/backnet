@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - run: cd web/app && npm install && npm run build
       - uses: actions/setup-go@v3
         with:
           go-version: 1.18
