@@ -11,6 +11,7 @@ import (
 	"github.com/aut-cic/backnet/internal/http/handler"
 	"github.com/aut-cic/backnet/internal/store/conference"
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 	"github.com/pterm/pterm"
 	"github.com/pterm/pterm/putils"
 )
@@ -25,6 +26,7 @@ var (
 	date    = "unknown"
 )
 
+// nolint: funlen
 func main() {
 	pterm.DefaultCenter.Println("in the name of god")
 
@@ -53,6 +55,7 @@ func main() {
 	}
 	pterm.Info.Println(t.Templates.DefinedTemplates())
 	app.Renderer = t
+	app.Debug = cfg.Debug
 
 	fsys, err := fs.Sub(assets, "web/app")
 	if err != nil {
@@ -67,11 +70,20 @@ func main() {
 			Store: conference.NewSQL(db),
 		}
 
-		h.Register(app.Group("/api/conference"))
+		h.Register(app.Group("/api/conference", middleware.BasicAuth(
+			func(username string, password string, _ echo.Context) (bool, error) {
+				if username == cfg.Auth.Username && password == cfg.Auth.Password {
+					return true, nil
+				}
+
+				return false, nil
+			})))
 	}
 
 	{
-		h := handler.Pages{}
+		h := handler.Pages{
+			Version: version,
+		}
 
 		h.Register(app.Group(""))
 	}
