@@ -33,6 +33,23 @@ func (con Conference) Create(c echo.Context) error {
 		return echo.ErrInternalServerError
 	}
 
+	return c.Render(http.StatusOK, "conference.html", map[string]interface{}{
+		"users": users,
+		"name":  req.Name,
+	})
+}
+
+// nolint: wrapcheck
+func (con Conference) List(c echo.Context) error {
+	name := c.Param("name")
+
+	users, err := con.Store.List(c.Request().Context(), name)
+	if err != nil {
+		pterm.Error.Printfln("conference creation failed %s", err)
+
+		return echo.ErrInternalServerError
+	}
+
 	buff := new(bytes.Buffer)
 
 	wc := csv.NewWriter(buff)
@@ -56,11 +73,12 @@ func (con Conference) Create(c echo.Context) error {
 
 	wc.Flush()
 
-	c.Response().Header().Add("Content-Disposition", fmt.Sprintf("attachment;filename=%s.csv", req.Name))
+	c.Response().Header().Add("Content-Disposition", fmt.Sprintf("attachment;filename=%s.csv", name))
 
 	return c.Blob(http.StatusOK, "text/csv", buff.Bytes())
 }
 
 func (con Conference) Register(g *echo.Group) {
 	g.POST("/", con.Create)
+	g.GET("/list/:name", con.List)
 }

@@ -6,11 +6,15 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-type Pages struct{}
+type Pages struct {
+	Version string
+}
 
 // nolint: wrapcheck
-func (Pages) Index(c echo.Context) error {
-	return c.Render(http.StatusOK, "index.html", nil)
+func (p Pages) Index(c echo.Context) error {
+	return c.Render(http.StatusOK, "index.html", map[string]string{
+		"version": p.Version,
+	})
 }
 
 // nolint: wrapcheck

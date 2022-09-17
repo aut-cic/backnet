@@ -7,6 +7,10 @@ import (
 func Default() Config {
 	return Config{
 		Debug: true,
+		Auth: Auth{
+			Username: "admin",
+			Password: "@dmin123",
+		},
 		Database: db.Config{
 			User:     "opnsense",
 			Password: "opnsense@123",

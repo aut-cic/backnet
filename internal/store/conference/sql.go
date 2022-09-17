@@ -70,5 +70,13 @@ func (sql *SQL) Delete(ctx context.Context, name string) error {
 }
 
 func (sql *SQL) List(ctx context.Context, name string) ([]model.Check, error) {
-	return nil, nil
+	var users []model.Check
+
+	if err := sql.DB.WithContext(ctx).
+		Where("username LIKE ?", fmt.Sprintf("%s_%%", name)).
+		Find(&users).Error; err != nil {
+		return nil, err
+	}
+
+	return users, nil
 }
