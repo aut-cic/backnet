@@ -30,6 +30,26 @@
         </div>
         <button type="submit" class="btn btn-primary">بساز 🚀</button>
       </form>
+      {{ if .users }}
+      کنفرانس {{ .name }} با موفقیت ایجاد شد.
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>نام کاربری</th>
+            <th>رمز عبور</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{ range .users }}
+          <tr>
+            <td>{{ .Username }}</td>
+            <td>{{ .Value }}</td>
+          </tr>
+          {{ end }}
+        </tbody>
+      </table>
+      <a href="/api/conference/list/{{ .name }}" target="_blank" class="btn btn-success">دانلود</a>
+      {{ end }}
     </div>
   </body>
 </html>
