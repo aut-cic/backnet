@@ -31,7 +31,7 @@ func (sql *SQL) Create(ctx context.Context, name string, count int, groupName st
 	for i := 0; i < count; i++ {
 		users[i] = model.Check{
 			ID:        0,
-			Username:  fmt.Sprintf("%s_%d", name, i),
+			Username:  fmt.Sprintf("%s%02d", name, i),
 			Attribute: "Cleartext-Password",
 			Op:        ":=",
 			Value:     RandomString(PasswordLength),
@@ -41,7 +41,7 @@ func (sql *SQL) Create(ctx context.Context, name string, count int, groupName st
 
 		tran.WithContext(ctx).Create(&model.UserGroup{
 			ID:        0,
-			Username:  fmt.Sprintf("%s_%d", name, i),
+			Username:  fmt.Sprintf("%s%02d", name, i),
 			Groupname: groupName,
 		})
 	}
@@ -58,12 +58,12 @@ func (sql *SQL) Delete(ctx context.Context, name string) error {
 
 	tran.
 		WithContext(ctx).
-		Where("username LIKE ?", fmt.Sprintf("%s_%%", name)).
+		Where("username LIKE ?", fmt.Sprintf("%s%%", name)).
 		Delete(new(model.Check))
 
 	tran.
 		WithContext(ctx).
-		Where("username LIKE ?", fmt.Sprintf("%s_%%", name)).
+		Where("username LIKE ?", fmt.Sprintf("%s%%", name)).
 		Delete(new(model.UserGroup))
 
 	return tran.Commit().Error
@@ -73,7 +73,7 @@ func (sql *SQL) List(ctx context.Context, name string) ([]model.Check, error) {
 	var users []model.Check
 
 	if err := sql.DB.WithContext(ctx).
-		Where("username LIKE ?", fmt.Sprintf("%s_%%", name)).
+		Where("username LIKE ?", fmt.Sprintf("%s%%", name)).
 		Find(&users).Error; err != nil {
 		return nil, err
 	}

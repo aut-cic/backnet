@@ -41,11 +41,11 @@ func (suite *SQLConferenceSuite) TestNewConference() {
 
 	require.Equal(10, len(users))
 
-	require.Equal("elahe_0", users[0].Username)
+	require.Equal("elahe00", users[0].Username)
 
 	ug := new(model.UserGroup)
 
-	require.NoError(suite.DB.Where("username = ?", "elahe_9").Find(ug).Error)
+	require.NoError(suite.DB.Where("username = ?", "elahe09").Find(ug).Error)
 
 	require.Equal("Faculty", ug.Groupname)
 }
