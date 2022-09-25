@@ -28,7 +28,7 @@ func (con Conference) Create(c echo.Context) error {
 
 	users, err := con.Store.Create(c.Request().Context(), req.Name, req.Count, req.Group)
 	if err != nil {
-		pterm.Error.Printfln("conference creation failed %s", err)
+		pterm.Error.Printfln("conference listing failed %s", err)
 
 		return echo.ErrInternalServerError
 	}
@@ -40,12 +40,43 @@ func (con Conference) Create(c echo.Context) error {
 }
 
 // nolint: wrapcheck
+func (con Conference) Show(c echo.Context) error {
+	// reading name from query parameters because we are using form to redirect.
+	name := c.QueryParam("name")
+
+	users, err := con.Store.List(c.Request().Context(), name)
+	if err != nil {
+		pterm.Error.Printfln("conference creation failed %s", err)
+
+		return echo.ErrInternalServerError
+	}
+
+	return c.Render(http.StatusOK, "conference.html", map[string]interface{}{
+		"users": users,
+		"name":  name,
+	})
+}
+
+// nolint: wrapcheck
+func (con Conference) Delete(c echo.Context) error {
+	name := c.Param("name")
+
+	if err := con.Store.Delete(c.Request().Context(), name); err != nil {
+		pterm.Error.Printfln("conference deletion failed %s", err)
+
+		return echo.ErrInternalServerError
+	}
+
+	return c.Render(http.StatusOK, "conference.html", nil)
+}
+
+// nolint: wrapcheck
 func (con Conference) List(c echo.Context) error {
 	name := c.Param("name")
 
 	users, err := con.Store.List(c.Request().Context(), name)
 	if err != nil {
-		pterm.Error.Printfln("conference creation failed %s", err)
+		pterm.Error.Printfln("conference listing failed %s", err)
 
 		return echo.ErrInternalServerError
 	}
@@ -81,4 +112,6 @@ func (con Conference) List(c echo.Context) error {
 func (con Conference) Register(g *echo.Group) {
 	g.POST("/", con.Create)
 	g.GET("/list/:name", con.List)
+	g.GET("/show", con.Show)
+	g.GET("/delete/:name", con.Delete)
 }

@@ -1,8 +1,8 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fa" dir="rtl">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Backnet</title>
     <script src="/dist/main.bundle.js"></script>
   </head>
@@ -10,18 +10,24 @@
     <div class="container">
       <h1>به سامانه مدیریت اینترنت دانشگاه امیرکبیر خوش آمدید!</h1>
       <p>
-      این سامانه برای انجام امور مدیریتی روزمره با سیستم اینترنت
-      دانشگاه طراحی شده است.
-      در نظر داشته باشید برای دسترسی به سرویس‌ها
-      نیاز است که نام کاربری و رمزعبور خود را همراه داشته باشید
-      و در مراحلی که از شما درخواست می‌شود آن را وارد نمایید.
+        این سامانه برای انجام امور مدیریتی روزمره با سیستم اینترنت دانشگاه طراحی
+        شده است. در نظر داشته باشید برای دسترسی به سرویس‌ها نیاز است که نام
+        کاربری و رمزعبور خود را همراه داشته باشید و در مراحلی که از شما درخواست
+        می‌شود آن را وارد نمایید.
       </p>
-      <p>
-      نسخه {{ .version }}
-      </p>
+      <p>نسخه {{ .version }}</p>
+      <h4>صفحات</h4>
       <div class="btn-group-vertical" role="group">
         <a href="/conference" class="btn btn-primary">ساخت کنفرانس</a>
       </div>
+      <h4>دسترسی به یک کنفرانس خاص</h4>
+      <form class="row g-3 needs-validation" method="get" action="/api/conference/show">
+        <div class="mb-3">
+          <label for="name" class="form-label">نام رویداد: </label>
+          <input type="text" id="name" name="name" class="form-control" placeholder="konkor"></input>
+        </div>
+        <button type="submit" class="btn btn-primary">برو</button>
+      </form>
     </div>
   </body>
 </html>
