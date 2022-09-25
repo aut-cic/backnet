@@ -58,12 +58,12 @@ func (sql *SQL) Delete(ctx context.Context, name string) error {
 
 	tran.
 		WithContext(ctx).
-		Where("username LIKE ?", fmt.Sprintf("%s%%", name)).
+		Where("username LIKE ?", fmt.Sprintf("%s__", name)).
 		Delete(new(model.Check))
 
 	tran.
 		WithContext(ctx).
-		Where("username LIKE ?", fmt.Sprintf("%s%%", name)).
+		Where("username LIKE ?", fmt.Sprintf("%s__", name)).
 		Delete(new(model.UserGroup))
 
 	return tran.Commit().Error
@@ -73,7 +73,7 @@ func (sql *SQL) List(ctx context.Context, name string) ([]model.Check, error) {
 	var users []model.Check
 
 	if err := sql.DB.WithContext(ctx).
-		Where("username LIKE ?", fmt.Sprintf("%s%%", name)).
+		Where("username LIKE ?", fmt.Sprintf("%s__", name)).
 		Find(&users).Error; err != nil {
 		return nil, err
 	}
