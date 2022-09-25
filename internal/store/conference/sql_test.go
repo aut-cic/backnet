@@ -33,7 +33,7 @@ func (suite *SQLConferenceSuite) SetupSuite() {
 func (suite *SQLConferenceSuite) TearDownSuite() {
 }
 
-func (suite *SQLConferenceSuite) TearDownTest() {
+func (suite *SQLConferenceSuite) AfterTest() {
 	require := suite.Require()
 
 	require.NoError(suite.DB.Where("1 = 1").Delete(new(model.Check)).Error)
@@ -63,11 +63,11 @@ func (suite *SQLConferenceSuite) TestListConference() {
 	_, err := suite.Store.Create(context.Background(), "parham", 10, "Faculty")
 	require.NoError(err)
 
-	suite.DB.Create(model.UserGroup{
+	require.NoError(suite.DB.Create(&model.UserGroup{
 		Username:  "parham.alvani",
 		Groupname: "Faculty",
 		ID:        0,
-	})
+	}).Error)
 
 	users, err := suite.Store.List(context.Background(), "parham")
 	require.NoError(err)
@@ -82,16 +82,16 @@ func (suite *SQLConferenceSuite) TestDeleteConference() {
 	_, err := suite.Store.Create(context.Background(), "parham", 10, "Faculty")
 	require.NoError(err)
 
-	suite.DB.Create(model.UserGroup{
+	require.NoError(suite.DB.Create(&model.UserGroup{
 		Username:  "parham.alvani",
 		Groupname: "Faculty",
 		ID:        0,
-	})
+	}).Error)
 
 	require.NoError(suite.Store.Delete(context.Background(), "parham"))
 
 	ug := new(model.UserGroup)
-	require.NoError(suite.DB.Where("username = parham.alvani").Find(ug).Error)
+	require.NoError(suite.DB.Where("username = ?", "parham.alvani").Find(ug).Error)
 
 	require.Equal("parham.alvani", ug.Username)
 	require.Equal("Faculty", ug.Groupname)
@@ -99,5 +99,6 @@ func (suite *SQLConferenceSuite) TestDeleteConference() {
 
 func TestSQLConferenceSuite(t *testing.T) {
 	t.Parallel()
+
 	suite.Run(t, new(SQLConferenceSuite))
 }
