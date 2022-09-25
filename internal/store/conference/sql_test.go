@@ -34,8 +34,10 @@ func (suite *SQLConferenceSuite) TearDownSuite() {
 }
 
 func (suite *SQLConferenceSuite) TearDownTest() {
-	suite.DB.Delete(new(model.Check))
-	suite.DB.Delete(new(model.UserGroup))
+	require := suite.Require()
+
+	require.NoError(suite.DB.Where("1 = 1").Delete(new(model.Check)).Error)
+	require.NoError(suite.DB.Where("1 = 1").Delete(new(model.UserGroup)).Error)
 }
 
 func (suite *SQLConferenceSuite) TestNewConference() {
