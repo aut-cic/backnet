@@ -26,7 +26,7 @@ func (sql *SQL) Create(ctx context.Context, name string, count int, groupName st
 		pterm.Error.Printfln("cannot delete the old conference users %s", err)
 	}
 
-	tran := sql.DB.Begin()
+	tx := sql.DB.Begin()
 
 	for i := 0; i < count; i++ {
 		users[i] = model.Check{
@@ -37,16 +37,24 @@ func (sql *SQL) Create(ctx context.Context, name string, count int, groupName st
 			Value:     RandomString(PasswordLength),
 		}
 
-		tran.WithContext(ctx).Create(&users[i])
+		if err := tx.WithContext(ctx).Create(&users[i]).Error; err != nil {
+			tx.Rollback()
 
-		tran.WithContext(ctx).Create(&model.UserGroup{
+			return nil, err
+		}
+
+		if err := tx.WithContext(ctx).Create(&model.UserGroup{
 			ID:        0,
 			Username:  fmt.Sprintf("%s%02d", name, i),
 			Groupname: groupName,
-		})
+		}).Error; err != nil {
+			tx.Rollback()
+
+			return nil, err
+		}
 	}
 
-	if err := tran.Commit().Error; err != nil {
+	if err := tx.Commit().Error; err != nil {
 		return nil, err
 	}
 
@@ -54,19 +62,27 @@ func (sql *SQL) Create(ctx context.Context, name string, count int, groupName st
 }
 
 func (sql *SQL) Delete(ctx context.Context, name string) error {
-	tran := sql.DB.Begin()
+	tx := sql.DB.Begin()
 
-	tran.
+	if err := tx.
 		WithContext(ctx).
 		Where("username LIKE ?", fmt.Sprintf("%s__", name)).
-		Delete(new(model.Check))
+		Delete(new(model.Check)).Error; err != nil {
+		tx.Rollback()
 
-	tran.
+		return err
+	}
+
+	if err := tx.
 		WithContext(ctx).
 		Where("username LIKE ?", fmt.Sprintf("%s__", name)).
-		Delete(new(model.UserGroup))
+		Delete(new(model.UserGroup)).Error; err != nil {
+		tx.Rollback()
 
-	return tran.Commit().Error
+		return err
+	}
+
+	return tx.Commit().Error
 }
 
 func (sql *SQL) List(ctx context.Context, name string) ([]model.Check, error) {
