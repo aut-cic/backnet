@@ -11,7 +11,7 @@
     "bootstrap": "^5.2.0",
     "bootstrap-icons": "^1.9.1",
     "css-loader": "^6.7.1",
-    "sass": "^1.54.8",
+    "sass": "^1.55.0",
     "sass-loader": "^13.0.2",
     "style-loader": "^3.3.1",
     "ts-loader": "^9.3.1",
