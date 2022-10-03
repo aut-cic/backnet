@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/knadh/koanf v1.4.3
 	github.com/labstack/echo/v4 v4.9.0
-	github.com/pterm/pterm v0.12.46
+	github.com/pterm/pterm v0.12.48
 	github.com/stretchr/testify v1.8.0
 	github.com/tidwall/pretty v1.2.0
 	gorm.io/driver/mysql v1.3.6
