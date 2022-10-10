@@ -8,7 +8,7 @@ require (
 	github.com/pterm/pterm v0.12.49
 	github.com/stretchr/testify v1.8.0
 	github.com/tidwall/pretty v1.2.1
-	gorm.io/driver/mysql v1.3.6
+	gorm.io/driver/mysql v1.4.1
 	gorm.io/gorm v1.23.10
 )
 
