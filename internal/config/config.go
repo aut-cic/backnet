@@ -9,6 +9,6 @@ type Config struct {
 }
 
 type Auth struct {
-	Username string
-	Password string
+	Username string `koanf:"username"`
+	Password string `koanf:"password"`
 }
