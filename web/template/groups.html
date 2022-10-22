@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Backnet</title>
+    <script src="/dist/main.bundle.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>نام گروه</th>
+          </tr>
+        </thead>
+        <tbody dir="ltr">
+          {{ range .groups }}
+          <tr>
+            <td>{{ . }}</td>
+          </tr>
+          {{ end }}
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
