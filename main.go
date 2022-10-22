@@ -10,6 +10,7 @@ import (
 	"github.com/aut-cic/backnet/internal/db"
 	"github.com/aut-cic/backnet/internal/http/handler"
 	"github.com/aut-cic/backnet/internal/store/conference"
+	"github.com/aut-cic/backnet/internal/store/group"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/pterm/pterm"
@@ -83,6 +84,7 @@ func main() {
 	{
 		h := handler.Pages{
 			Version: version,
+			Store:   group.NewSQL(db),
 		}
 
 		h.Register(app.Group(""))
