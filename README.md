@@ -1,7 +1,7 @@
 # Backnet
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/aut-cic/backnet/release?label=release&logo=github&style=flat-square)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/aut-cic/backnet/test?label=test&logo=github&style=flat-square)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/aut-cic/backnet/test.yaml?label=test&logo=github&style=flat-square&branch=main)
+![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/aut-cic/backnet?logo=github&style=flat-square)
 
 ## Introduction
 
