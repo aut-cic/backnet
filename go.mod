@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/knadh/koanf v1.4.5
 	github.com/labstack/echo/v4 v4.10.0
-	github.com/pterm/pterm v0.12.53
+	github.com/pterm/pterm v0.12.54
 	github.com/stretchr/testify v1.8.1
 	github.com/tidwall/pretty v1.2.1
 	gorm.io/driver/mysql v1.4.5
@@ -14,7 +14,7 @@ require (
 
 require (
 	atomicgo.dev/cursor v0.1.1 // indirect
-	atomicgo.dev/keyboard v0.2.8 // indirect
+	atomicgo.dev/keyboard v0.2.9 // indirect
 	github.com/containerd/console v1.0.3 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/fatih/structs v1.1.0 // indirect
