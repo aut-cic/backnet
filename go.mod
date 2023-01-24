@@ -3,7 +3,7 @@ module github.com/aut-cic/backnet
 go 1.19
 
 require (
-	github.com/knadh/koanf v1.4.5
+	github.com/knadh/koanf v1.5.0
 	github.com/labstack/echo/v4 v4.10.0
 	github.com/pterm/pterm v0.12.54
 	github.com/stretchr/testify v1.8.1
