@@ -8,7 +8,7 @@ require (
 	github.com/pterm/pterm v0.12.54
 	github.com/stretchr/testify v1.8.1
 	github.com/tidwall/pretty v1.2.1
-	gorm.io/driver/mysql v1.4.6
+	gorm.io/driver/mysql v1.4.7
 	gorm.io/gorm v1.24.5
 )
 
@@ -35,7 +35,6 @@ require (
 	github.com/pelletier/go-toml v1.9.5 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/rivo/uniseg v0.4.3 // indirect
-	github.com/stretchr/objx v0.5.0 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasttemplate v1.2.2 // indirect
 	github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e // indirect
