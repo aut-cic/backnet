@@ -6,7 +6,7 @@ require (
 	github.com/knadh/koanf v1.5.0
 	github.com/labstack/echo/v4 v4.10.0
 	github.com/pterm/pterm v0.12.54
-	github.com/stretchr/testify v1.8.1
+	github.com/stretchr/testify v1.8.2
 	github.com/tidwall/pretty v1.2.1
 	gorm.io/driver/mysql v1.4.7
 	gorm.io/gorm v1.24.5
