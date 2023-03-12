@@ -14,7 +14,7 @@ jobs:
       - run: cd web/app && npm install && npm run build
       - uses: actions/setup-go@v3
         with:
-          go-version: 1.18
+          go-version: "1.20"
       - uses: goreleaser/goreleaser-action@v4
         with:
           version: latest
