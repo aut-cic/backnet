@@ -42,7 +42,10 @@ func (suite *SQLDiscountSuite) TestListConference() {
 	require.NoError(err)
 
 	suite.Len(discounts, 19)
+
 	suite.Equal(discounts[0].Type(), "time")
+	suite.Equal(discounts[0].Value(), "23:00-23:59")
+	suite.Equal(discounts[0].Factor(), 0.4)
 }
 
 func TestSQLDiscountSuite(t *testing.T) {
