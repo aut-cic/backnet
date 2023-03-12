@@ -8,6 +8,7 @@ services:
       - ./migrations/radcheck.sql:/docker-entrypoint-initdb.d/radcheck.sql
       - ./migrations/radusergroup.sql:/docker-entrypoint-initdb.d/radusergroup.sql
       - ./migrations/radpackages.sql:/docker-entrypoint-initdb.d/radpackages.sql
+      - ./migrations/discountfactor.sql:/docker-entrypoint-initdb.d/discountfactor.sql
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: opnsense
