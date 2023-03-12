@@ -1,6 +1,7 @@
 package discount
 
 import (
+	"context"
 	"errors"
 
 	"github.com/aut-cic/backnet/internal/model"
@@ -9,6 +10,6 @@ import (
 var ErrInvalidDiscountType = errors.New("unknown discount type")
 
 type Discount interface {
-	Create(model.Discount) error
-	List() ([]model.Discount, error)
+	Create(context.Context, model.Discount) error
+	List(context.Context) ([]model.Discount, error)
 }
