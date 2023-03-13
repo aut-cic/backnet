@@ -25,15 +25,15 @@ func (sql *SQL) List(ctx context.Context) ([]model.Discount, error) {
 		return nil, fmt.Errorf("reading discounts from database failed %w", err)
 	}
 
-	var ds []model.Discount
+	ds := make([]model.Discount, len(dfs))
 
-	for _, discount := range dfs {
+	for i, discount := range dfs {
 		d, err := model.ToDiscount(discount)
 		if err != nil {
 			return nil, fmt.Errorf("casting discount database record failed %w", err)
 		}
 
-		ds = append(ds, d)
+		ds[i] = d
 	}
 
 	return ds, nil
