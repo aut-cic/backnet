@@ -1,7 +1,12 @@
-# Backnet
+<h1 align="center">Backnet</h1>
+<h6 align="center">The back door to the AUT internet</h6>
 
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/aut-cic/backnet/test.yaml?label=test&logo=github&style=flat-square&branch=main)
-![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/aut-cic/backnet?logo=github&style=flat-square)
+<p align="center">
+  <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/aut-cic/backnet/test.yaml?logo=github&style=for-the-badge">
+  <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/aut-cic/backnet/release.yaml?label=release&logo=github&style=for-the-badge">
+  <img alt="GitHub Release Date" src="https://img.shields.io/github/release-date/aut-cic/backnet?logo=github&style=for-the-badge">
+  <img alt="GitHub release (latest SemVer)" src="https://img.shields.io/github/v/release/aut-cic/backnet?logo=github&style=for-the-badge">
+</p>
 
 ## Introduction
 
