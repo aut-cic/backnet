@@ -14,3 +14,7 @@ services:
       MYSQL_USER: opnsense
       MYSQL_PASSWORD: opnsense@123
       MYSQL_DATABASE: radius
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
