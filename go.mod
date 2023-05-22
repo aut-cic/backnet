@@ -9,7 +9,7 @@ require (
 	github.com/knadh/koanf v1.5.0
 	github.com/labstack/echo/v4 v4.10.2
 	github.com/pterm/pterm v0.12.61
-	github.com/stretchr/testify v1.8.2
+	github.com/stretchr/testify v1.8.3
 	github.com/tidwall/pretty v1.2.1
 	github.com/urfave/cli/v3 v3.0.0-alpha2
 	gorm.io/driver/mysql v1.5.0
