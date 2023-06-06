@@ -1,7 +1,7 @@
 package request
 
 type Conference struct {
-	Name  string `json:"name" form:"name"`
-	Count int    `json:"count" form:"count"`
-	Group string `json:"group" form:"group"`
+	Name  string `form:"name"  json:"name"`
+	Count int    `form:"count" json:"count"`
+	Group string `form:"group" json:"group"`
 }
