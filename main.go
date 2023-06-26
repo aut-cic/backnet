@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"embed"
 	"os"
 
@@ -37,7 +38,7 @@ func main() {
 		)
 
 	// nolint: exhaustruct
-	app := &cli.App{
+	app := &cli.Command{
 		Name:           "Backnet",
 		Usage:          "The backdoor to the AUT Internet",
 		Description:    "The backdoor to the AUT Internet",
@@ -70,5 +71,5 @@ func main() {
 		},
 	}
 
-	_ = app.Run(os.Args)
+	_ = app.Run(context.Background(), os.Args)
 }
