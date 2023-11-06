@@ -7,5 +7,5 @@ import (
 )
 
 type Group interface {
-	List(context.Context) ([]model.Package, error)
+	List(ctx context.Context) ([]model.Package, error)
 }

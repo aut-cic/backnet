@@ -10,9 +10,9 @@ import (
 const PasswordLength = 7
 
 type Conference interface {
-	Create(context.Context, string, int, string) ([]model.Check, error)
-	Delete(context.Context, string) error
-	List(context.Context, string) ([]model.Check, error)
+	Create(ctx context.Context, name string, count int, prefix string) ([]model.Check, error)
+	Delete(ctx context.Context, name string) error
+	List(ctx context.Context, name string) ([]model.Check, error)
 }
 
 func RandomString(n int) string {

@@ -7,7 +7,7 @@ import (
 )
 
 type Discount interface {
-	Create(context.Context, model.Discount) error
-	Delete(context.Context, model.Discount) error
-	List(context.Context) ([]model.Discount, error)
+	Create(ctx context.Context, discont model.Discount) error
+	Delete(ctx context.Context, discont model.Discount) error
+	List(ctx context.Context) ([]model.Discount, error)
 }
