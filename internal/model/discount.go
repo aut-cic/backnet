@@ -140,7 +140,7 @@ func NewDayDiscount(df DiscountFactor) (DayDiscount, error) {
 // https://pkg.go.dev/time#Weekday
 // https://www.geeksforgeeks.org/python-datetime-weekday-method-with-example/
 func (d DayDiscount) Value() string {
-	return fmt.Sprintf("%d", ((int(d.Day) - 1) % WeekDays))
+	return strconv.Itoa((int(d.Day) - 1) % WeekDays)
 }
 
 func (d DayDiscount) Type() string {

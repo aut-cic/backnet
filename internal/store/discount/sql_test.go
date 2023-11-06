@@ -47,11 +47,11 @@ func (suite *SQLDiscountSuite) TestListDiscounts() {
 
 	require.Equal("time", discounts[0].Type())
 	require.Equal("23:00-23:59", discounts[0].Value())
-	require.Equal(0.4, discounts[0].Factor())
+	require.InEpsilon(0.4, discounts[0].Factor(), 0.001)
 
 	require.Equal("day_of_week", discounts[1].Type())
 	require.Equal("3", discounts[1].Value())
-	require.Equal(0.6, discounts[1].Factor())
+	require.InEpsilon(0.6, discounts[1].Factor(), 0.001)
 	require.IsType(model.DayDiscount{Day: 0, F: 0}, discounts[1])
 }
 
