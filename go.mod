@@ -7,7 +7,7 @@ require (
 	github.com/charmbracelet/bubbletea v0.24.2
 	github.com/charmbracelet/lipgloss v0.9.1
 	github.com/knadh/koanf v1.5.0
-	github.com/labstack/echo/v4 v4.11.2
+	github.com/labstack/echo/v4 v4.11.3
 	github.com/pterm/pterm v0.12.70
 	github.com/stretchr/testify v1.8.4
 	github.com/tidwall/pretty v1.2.1
