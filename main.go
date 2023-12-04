@@ -48,7 +48,7 @@ func main() {
 			{
 				Name:        "serve",
 				Description: "Run a webserver on :1378",
-				Action: func(c *cli.Context) error {
+				Action: func(_ context.Context, _ *cli.Command) error {
 					serve.Main(assets, version)
 
 					return nil
@@ -60,7 +60,7 @@ func main() {
 				Commands: []*cli.Command{
 					{
 						Name: "discount",
-						Action: func(c *cli.Context) error {
+						Action: func(_ context.Context, _ *cli.Command) error {
 							backnetCli.Discount()
 
 							return nil
