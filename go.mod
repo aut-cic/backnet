@@ -11,7 +11,7 @@ require (
 	github.com/pterm/pterm v0.12.73
 	github.com/stretchr/testify v1.8.4
 	github.com/tidwall/pretty v1.2.1
-	github.com/urfave/cli/v3 v3.0.0-alpha7
+	github.com/urfave/cli/v3 v3.0.0-alpha8
 	gorm.io/driver/mysql v1.5.2
 	gorm.io/gorm v1.25.5
 )
